@@ -2,7 +2,6 @@
 """BaseModel module for AirBnB clone project"""
 from uuid import uuid4
 from datetime import datetime
-from models import storage
 
 class BaseModel:
     """Base class for all AirBnB objects"""
@@ -14,6 +13,7 @@ class BaseModel:
             *args: Variable length argument list (not used)
             **kwargs: Keyword arguments for initialization
         """
+        from models import storage  # Import inside method
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
@@ -32,6 +32,7 @@ class BaseModel:
 
     def save(self):
         """Update updated_at with current datetime and save to storage"""
+        from models import storage  # Import inside method
         self.updated_at = datetime.now()
         storage.save()
 
